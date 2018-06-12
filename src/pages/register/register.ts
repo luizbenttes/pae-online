@@ -22,11 +22,13 @@ export class RegisterPage {
 
   async registerUser(user: User){
     try{
-      const result  = await this.aFAuth.auth.createUserWithEmailAndPassword(user.email, user.password)
-      console.log(result)
+      const result  = await this.aFAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
+      console.log(result);
+      this.navCtrl.popToRoot()
     }
     catch (e) {
-      console.error(e)
+      console.error(e);
     }
   }
+
 }

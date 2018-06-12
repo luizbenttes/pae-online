@@ -15,26 +15,38 @@ import { Storage } from "@ionic/storage";
   templateUrl: 'home.html',
 })
 export class HomePage {
-  email : string;
-  
+
+  email: string;
+
   constructor(private afAuth: AngularFireAuth, private toast: ToastController,
     public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
+      this.salvarEmail()
   }
-  
-  ionViewDidLoad() {
-    this.afAuth.authState.subscribe(data => {
-      if (data && data.email) {
-        this.toast.create({
-          message: `Logado!`,
-          duration: 3000
-        }).present();
-      }
-    })
 
+  ionViewDidLoad() {
+
+  }
+
+
+  salvarEmail() {
     this.storage.get('email').then((val) => {
       this.email = val;
       console.log('Usuário da Sessão: ', this.email);
     });
   }
+
+  goToNovaRequisicao(){
+    this.navCtrl.push('NovaRequisicaoPage')
+  }
+  
+  goToInbox(){
+    this.navCtrl.push('InboxPage')
+  }
+
+  goToSobre(){
+    this.navCtrl.push('SobrePage')
+  }
+
+
 }
 

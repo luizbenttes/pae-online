@@ -7,12 +7,52 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Início</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <h2>Bem Vindo, {{email}}</h2>
+  <ion-card>
+
+    <ion-card-header>
+     Bem vindo, {{email}}
+    </ion-card-header>
+  
+    <ion-card-content>
+      <p>Você acaba de acessar o aplicativo mais legal (e útil) de toda sua tajetória acadêmica.</p>
+      <p>Aqui você pode fazer requisições diretamente para sua Coordenação sem precisar lidar com o mau humor das atentendes do PAE</p>
+      
+    </ion-card-content>
+  
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Opções
+    </ion-card-header>
+  
+    <ion-list>
+      <button ion-item (click)='goToNovaRequisicao()'>
+        <ion-icon name="ios-add" item-start></ion-icon>
+        Nova Requisição
+      </button>
+  
+      <button ion-item (click)='goToInbox()'>
+        <ion-icon name="ios-archive" item-start></ion-icon>
+        Inbox
+      </button>
+  
+      <button ion-item (click)='goToSobre()'>
+        <ion-icon name="ios-help" item-start></ion-icon>
+        Sobre
+      </button>
+  
+      <button ion-item>
+        <ion-icon name="ios-log-out" item-start></ion-icon>
+        Logoff
+      </button>
+    </ion-list>
+  </ion-card>
 </ion-content>

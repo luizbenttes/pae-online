@@ -14,6 +14,12 @@ import { RegisterPageModule } from '../pages/register/register.module';
 import { RegisterPage } from '../pages/register/register';
 import { HomePageModule } from '../pages/home/home.module';
 import { HomePage } from '../pages/home/home';
+import { SobrePage } from '../pages/sobre/sobre';
+import { NovaRequisicaoPage } from '../pages/nova-requisicao/nova-requisicao';
+import { InboxPage } from '../pages/inbox/inbox';
+import { InboxPageModule } from '../pages/inbox/inbox.module';
+import { SobrePageModule } from '../pages/sobre/sobre.module';
+import { NovaRequisicaoPageModule } from '../pages/nova-requisicao/nova-requisicao.module';
 
 
 @NgModule({
@@ -24,6 +30,9 @@ import { HomePage } from '../pages/home/home';
   imports: [
     BrowserModule,
     HomePageModule,
+    InboxPageModule,
+    SobrePageModule,
+    NovaRequisicaoPageModule,
     IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
@@ -35,13 +44,16 @@ import { HomePage } from '../pages/home/home';
     MyApp,
     HomePage,
     RegisterPage,
+    SobrePage,
+    NovaRequisicaoPage,
+    InboxPage,
     LoginPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     IonicStorageModule,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
-export class AppModule {}
+export class AppModule { }
