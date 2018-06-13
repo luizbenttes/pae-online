@@ -7,6 +7,8 @@ import { AngularFireModule } from "angularfire2";
 import { AngularFireAuthModule } from "angularfire2/auth";
 import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
+import { Network } from '@ionic-native/network';
+
 
 import { FIREBASE_CONFIG } from './app.firebase.config';
 import { LoginPage } from '../pages/login/login';
@@ -47,12 +49,13 @@ import { NovaRequisicaoPageModule } from '../pages/nova-requisicao/nova-requisic
     SobrePage,
     NovaRequisicaoPage,
     InboxPage,
-    LoginPage
+    LoginPage,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     IonicStorageModule,
+    Network,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

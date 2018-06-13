@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, AlertController, ToastController }
 import { User } from '../../models/user';
 import { AngularFireAuth } from "angularfire2/auth";
 import { Storage } from "@ionic/storage";
+import { Network } from '@ionic-native/network';
+
 
 
 @IonicPage()
@@ -14,6 +16,7 @@ import { Storage } from "@ionic/storage";
 export class LoginPage {
 
   user = {} as User;
+  connection: boolean;
 
   constructor(
     private afAuth: AngularFireAuth, 
@@ -21,7 +24,8 @@ export class LoginPage {
     public navParams: NavParams, 
     private storage: Storage,
     private alertCtrl: AlertController,
-    private toastCtrl: ToastController) {
+    private toastCtrl: ToastController,
+    private network: Network) {
   }
 
   ionViewDidLoad() {
@@ -39,6 +43,22 @@ export class LoginPage {
       });
   }
 
+  verifyNetwork(user: User){
+    this.network.onConnect().subscribe(() => {
+      this.connection = true;
+    });
+
+    this.network.onDisconnect().subscribe(() => {
+      this.connection = false;
+    });
+
+    if (!this.connection){
+      this.toastCtrl.create({ duration: 3000, position: 'bottom', message: 'Dispositivo desconectdado. Por favor, conectar-se a uma rede!' })
+      .present();
+    } else {
+      this.login(user);
+    }
+  }
 
   register(){
     this.navCtrl.push('RegisterPage');
