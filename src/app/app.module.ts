@@ -3,8 +3,11 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+
 import { AngularFireModule } from "angularfire2";
 import { AngularFireAuthModule } from "angularfire2/auth";
+import { AngularFireDatabase, AngularFireDatabaseModule } from "angularfire2/database";
+
 import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 
@@ -20,6 +23,8 @@ import { InboxPage } from '../pages/inbox/inbox';
 import { InboxPageModule } from '../pages/inbox/inbox.module';
 import { SobrePageModule } from '../pages/sobre/sobre.module';
 import { NovaRequisicaoPageModule } from '../pages/nova-requisicao/nova-requisicao.module';
+
+import { RequestProvider } from '../providers/request/request';
 
 
 @NgModule({
@@ -37,6 +42,7 @@ import { NovaRequisicaoPageModule } from '../pages/nova-requisicao/nova-requisic
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireAuthModule,
+    AngularFireDatabaseModule,
     RegisterPageModule
   ],
   bootstrap: [IonicApp],
@@ -53,7 +59,8 @@ import { NovaRequisicaoPageModule } from '../pages/nova-requisicao/nova-requisic
     StatusBar,
     SplashScreen,
     IonicStorageModule,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    RequestProvider
   ]
 })
 export class AppModule { }

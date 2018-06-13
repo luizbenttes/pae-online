@@ -1,13 +1,8 @@
 import { Component} from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Storage } from "@ionic/storage";
-/**
- * Generated class for the NovaRequisicaoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { RequestProvider } from '../../providers/request/request';
 
 @IonicPage()
 @Component({
@@ -16,14 +11,22 @@ import { Storage } from "@ionic/storage";
 })
 
 
-
-
 export class NovaRequisicaoPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage) {
-    this.getEmail();
-  }
+  form: FormGroup;
+  request: any;
   email : string;
+
+constructor(
+    public navCtrl: NavController, public navParams: NavParams,
+    private formBuilder: FormBuilder, private provider: RequestProvider,
+    private toast: ToastController,
+    private storage: Storage)
+    {
+    this.request = {};
+    this.getEmail();
+    this.createForm();
+  }
+  
 
 
   ionViewDidLoad() {
@@ -34,6 +37,31 @@ export class NovaRequisicaoPage {
     this.storage.get('email').then((val) => {
       this.email = val;
     });
+  }
+
+  createForm() {
+    this.form = this.formBuilder.group({
+      key: [this.request.key],
+      emailAluno: [this.request.emailAluno],
+      emailCoor: [this.request.emailCoor],
+      data: [this.request.data],
+      requisicao : [this.request.requisicao],
+      resposta: [this.request.resposta ]
+    });
+  }
+ 
+  onSubmit() {
+    if (this.form.valid) {
+      this.provider.save(this.form.value)
+        .then(() => {
+          this.toast.create({ message: 'Requisição Enviada.', duration: 3000 }).present();
+          this.navCtrl.push("HomePage");
+        })
+        .catch((e) => {
+          this.toast.create({ message: 'Erro ao enviar requisição.', duration: 3000 }).present();
+          console.error(e);
+        })
+    }
   }
 
 }

@@ -16,9 +16,9 @@ export class LoginPage {
   user = {} as User;
 
   constructor(
-    private afAuth: AngularFireAuth, 
-    public navCtrl: NavController, 
-    public navParams: NavParams, 
+    private afAuth: AngularFireAuth,
+    public navCtrl: NavController,
+    public navParams: NavParams,
     private storage: Storage,
     private alertCtrl: AlertController,
     private toastCtrl: ToastController) {
@@ -28,7 +28,7 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  async login(user: User){
+  async login(user: User) {
     this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password)
       .then(() => {
         this.navCtrl.setRoot('HomePage');
@@ -40,9 +40,8 @@ export class LoginPage {
   }
 
 
-  register(){
+  register() {
     this.navCtrl.push('RegisterPage');
   }
-
 
 }

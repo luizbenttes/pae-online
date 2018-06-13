@@ -46,7 +46,5 @@ export class HomePage {
   goToSobre(){
     this.navCtrl.push('SobrePage')
   }
-
-
 }
 

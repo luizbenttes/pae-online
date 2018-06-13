@@ -12,39 +12,28 @@
 
 </ion-header>
 
-
 <ion-content padding>
-  <ion-list>
-    <div>
-      <ion-item>
-        <ion-label floating>Nome Completo</ion-label>
-        <ion-input type="text"></ion-input>
-      </ion-item>
+  <form [formGroup]="form">
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type="text" formControlName="emailAluno" [(ngModel)]="email"></ion-input>
+    </ion-item>
 
-      <ion-item>
-        <ion-label floating>E-mail</ion-label>
-        <ion-input type="text" [(ngModel)]="email"></ion-input>
-      </ion-item>
+
+    <ion-item>
+      <ion-label floating>Email Coordenação</ion-label>
+      <ion-input type="text" formControlName="emailCoor"></ion-input>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label floating>Requisição</ion-label>
+      <ion-textarea type="text" formControlName="requisicao"></ion-textarea>
+    </ion-item>
+
+
+    <div padding>
+      <button ion-button block type="submit" (click)="onSubmit()">Enviar</button>
     </div>
-
-    <div>
-      <ion-item>
-        <ion-label floating>Departamento</ion-label>
-        <ion-select [(ngModel)]="departamento">
-          <ion-option value="nucomp">NUCOMP</ion-option>
-          <ion-option value="ciclo">Ciclo Básico</ion-option>
-        </ion-select>
-      </ion-item>
-
-      <ion-item>
-        <ion-label floating>Requerimento</ion-label>
-        <ion-textarea></ion-textarea>
-      </ion-item>
-
-    </div>
-  </ion-list>
-
-  <div padding>
-    <button ion-button (click)="enviarReq()" block>Enviar</button>
-  </div>
+  </form>
 </ion-content>
