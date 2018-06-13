@@ -25,25 +25,27 @@ import { SobrePageModule } from '../pages/sobre/sobre.module';
 import { NovaRequisicaoPageModule } from '../pages/nova-requisicao/nova-requisicao.module';
 
 import { RequestProvider } from '../providers/request/request';
+import { LoginPageModule } from '../pages/login/login.module';
+import { UserProvider } from '../providers/user/user';
 
 
 @NgModule({
   declarations: [
-    MyApp,
     LoginPage,
+    MyApp,
   ],
   imports: [
     BrowserModule,
     HomePageModule,
     InboxPageModule,
     SobrePageModule,
+    RegisterPageModule,
     NovaRequisicaoPageModule,
     IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireAuthModule,
-    AngularFireDatabaseModule,
-    RegisterPageModule
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -60,7 +62,8 @@ import { RequestProvider } from '../providers/request/request';
     SplashScreen,
     IonicStorageModule,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    RequestProvider
+    RequestProvider,
+    UserProvider
   ]
 })
 export class AppModule { }

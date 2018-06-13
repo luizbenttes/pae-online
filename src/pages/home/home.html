@@ -41,7 +41,7 @@
   
       <button ion-item (click)='goToInbox()'>
         <ion-icon name="ios-archive" item-start></ion-icon>
-        Inbox
+        Requisições
       </button>
   
       <button ion-item (click)='goToSobre()'>
@@ -49,7 +49,7 @@
         Sobre
       </button>
   
-      <button ion-item navPush="LoginPage">
+      <button ion-item (click)='logout()'>
         <ion-icon name="ios-log-out" item-start></ion-icon>
         Logoff
       </button>

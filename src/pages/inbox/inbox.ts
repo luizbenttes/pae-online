@@ -1,14 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { Storage } from "@ionic/storage";
 import { Observable } from 'rxjs/Observable';
 import { RequestProvider } from '../../providers/request/request';
+import { UserProvider } from '../../providers/user/user';
 
-/**
- * Generated class for the InboxPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -17,12 +13,15 @@ import { RequestProvider } from '../../providers/request/request';
 })
 export class InboxPage {
   requests : Observable<any>;
+  email: any;
 
   constructor(public navCtrl: NavController,
     private provider: RequestProvider,
-    private toast: ToastController) {
+    private toast: ToastController,
+    private userProvider: UserProvider) {
 
-      this.requests = this.provider.getAll();
+      this.email = this.userProvider.getUserEmail();
+      this.requests = this.provider.getAllMine(this.email);
   }
 
   ionViewDidLoad() {

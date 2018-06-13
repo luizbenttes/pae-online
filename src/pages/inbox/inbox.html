@@ -1,8 +1,7 @@
-
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Inbox</ion-title>
+    <ion-title>Requisições</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -10,17 +9,15 @@
 <ion-content padding>
 
   <ion-list>
-    <ion-item-sliding *ngFor="let request of requests | async">
-      <ion-item>
-        <h1>{{ request.emailAluno }}</h1>
+    <ion-card *ngFor="let request of requests | async">
+      <ion-card-header>
+        Para: {{ request.emailCoor }}
+      </ion-card-header>
+      <ion-card-content>
         <p>{{ request.requisicao }}</p>
-      </ion-item>
-      <ion-item-options side="left">
-        <button ion-button color="danger" (click)="removeRequest(request.key)">
-          <ion-icon name="trash"></ion-icon>
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
+        <p>{{ request.resposta }}</p>
+      </ion-card-content>
+    </ion-card>
   </ion-list>
 
 </ion-content>

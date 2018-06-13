@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { User } from '../../models/user';
 import { AngularFireAuth } from "angularfire2/auth";
-import { Storage } from "@ionic/storage";
+import { UserProvider } from '../../providers/user/user';
 
 
 @IonicPage()
@@ -19,9 +19,9 @@ export class LoginPage {
     private afAuth: AngularFireAuth,
     public navCtrl: NavController,
     public navParams: NavParams,
-    private storage: Storage,
     private alertCtrl: AlertController,
-    private toastCtrl: ToastController) {
+    private toastCtrl: ToastController,
+    private userProvider: UserProvider) {
   }
 
   ionViewDidLoad() {
@@ -31,6 +31,7 @@ export class LoginPage {
   async login(user: User) {
     this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password)
       .then(() => {
+        this.userProvider.setUserEmail(user.email);
         this.navCtrl.setRoot('HomePage');
       })
       .catch((error) => {

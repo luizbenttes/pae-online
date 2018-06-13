@@ -46,5 +46,10 @@ export class HomePage {
   goToSobre(){
     this.navCtrl.push('SobrePage')
   }
+
+  logout(){
+    this.afAuth.auth.signOut();
+    this.storage.clear();
+  }
 }
 

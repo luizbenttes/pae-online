@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Storage } from "@ionic/storage";
 import { RequestProvider } from '../../providers/request/request';
+import { UserProvider } from '../../providers/user/user';
 
 @IonicPage()
 @Component({
@@ -17,27 +18,23 @@ export class NovaRequisicaoPage {
   email : string;
 
 constructor(
-    public navCtrl: NavController, public navParams: NavParams,
-    private formBuilder: FormBuilder, private provider: RequestProvider,
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private formBuilder: FormBuilder, 
+    private provider: RequestProvider,
     private toast: ToastController,
-    private storage: Storage)
+    private userProvider: UserProvider)
     {
     this.request = {};
-    this.getEmail();
+    this.email = this.userProvider.getUserEmail();
     this.createForm();
   }
-  
 
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NovaRequisicaoPage');
   }
-  
-  getEmail() {
-    this.storage.get('email').then((val) => {
-      this.email = val;
-    });
-  }
+
 
   createForm() {
     this.form = this.formBuilder.group({
@@ -46,7 +43,7 @@ constructor(
       emailCoor: [this.request.emailCoor],
       data: [this.request.data],
       requisicao : [this.request.requisicao],
-      resposta: [this.request.resposta ]
+      resposta: ["Sem Resposta"]
     });
   }
  

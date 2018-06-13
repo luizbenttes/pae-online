@@ -11,12 +11,22 @@ export class RequestProvider {
   }
 
   getAll() {
-    return this.db.list(this.PATH, ref => ref.orderByChild('name'))
+    return this.db.list(this.PATH, ref => ref.orderByChild('requisicao').equalTo('w'))
       .snapshotChanges()
       .map(changes => {
         return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
       })
   }
+
+  getAllMine(aluno: string) {
+    console.log("este é o email",aluno);
+    return this.db.list(this.PATH, ref => ref.orderByChild('emailAluno').equalTo(aluno))
+      .snapshotChanges()
+      .map(changes => {
+        return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+      })
+  }
+
 
   get(key: string) {
     return this.db.object(this.PATH + key).snapshotChanges()
