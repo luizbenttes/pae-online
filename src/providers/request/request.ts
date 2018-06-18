@@ -18,15 +18,23 @@ export class RequestProvider {
       })
   }
 
-  getAllMine(aluno: string) {
+  getAllMineWithoutAnswer(aluno: string) {
     console.log("este é o email",aluno);
-    return this.db.list(this.PATH, ref => ref.orderByChild('emailAluno').equalTo(aluno))
+    return this.db.list(this.PATH, ref => ref.orderByChild('id').equalTo(aluno +"Sem resposta"))
       .snapshotChanges()
       .map(changes => {
         return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
       })
   }
 
+  getAllMineWithAnswer(aluno: string) {
+    console.log("este é o email",aluno);
+    return this.db.list(this.PATH, ref => ref.orderByChild('id').equalTo(aluno +"Com resposta"))
+      .snapshotChanges()
+      .map(changes => {
+        return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+      })
+  }
 
   get(key: string) {
     return this.db.object(this.PATH + key).snapshotChanges()
@@ -43,6 +51,8 @@ export class RequestProvider {
              emailCoor: request.emailCoor,
              data: request.data,
              requisicao : request.requisicao,
+             id: request.id,
+             id2: request.emailCoor,
              resposta: request.resposta})
           .then(() => resolve())
           .catch((e) => reject(e));
@@ -52,6 +62,8 @@ export class RequestProvider {
             emailCoor: request.emailCoor,
             data: request.data,
             requisicao : request.requisicao,
+            id: request.id,
+            id2: request.emailCoor,
             resposta: request.resposta})
           .then(() => resolve());
       }

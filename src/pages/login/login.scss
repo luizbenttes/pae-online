@@ -1,3 +1,39 @@
 page-login {
+    .passwordIcon{
+        font-size:2rem !important;
+        position: relative !important;
+        top: 20px !important;
+        margin: 1 auto !important;
+    }
+
+    .submit-btn {
+        background: rgb(13, 100, 25);
+        border-radius: 30px !important;
+        border: 0px solid #ffffff;
+    }
+
+    .signup-col {
+        margin: 0px 16px 0px 16px;
+        padding-bottom: 20px;
+    }
+
+    .register-btn {
+        color: #1619f0;
+        font-size: 0.8em;
+    }
+        
+    .logo-row {
+        //padding-top: 50px;
+        padding-bottom: 20px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+
+    .login-box {
+        // padding: 0px 20px 0px 20px;
+        padding-bottom: 25px;
+      }
 
 }

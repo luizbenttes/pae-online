@@ -27,6 +27,8 @@ import { NovaRequisicaoPageModule } from '../pages/nova-requisicao/nova-requisic
 import { RequestProvider } from '../providers/request/request';
 import { LoginPageModule } from '../pages/login/login.module';
 import { UserProvider } from '../providers/user/user';
+import { RespondidasPageModule } from '../pages/respondidas/respondidas.module';
+import { RespondidasPage } from '../pages/respondidas/respondidas';
 
 
 @NgModule({
@@ -38,6 +40,7 @@ import { UserProvider } from '../providers/user/user';
     BrowserModule,
     HomePageModule,
     InboxPageModule,
+    RespondidasPageModule,
     SobrePageModule,
     RegisterPageModule,
     NovaRequisicaoPageModule,
@@ -51,6 +54,7 @@ import { UserProvider } from '../providers/user/user';
   entryComponents: [
     MyApp,
     HomePage,
+    RespondidasPage,
     RegisterPage,
     SobrePage,
     NovaRequisicaoPage,

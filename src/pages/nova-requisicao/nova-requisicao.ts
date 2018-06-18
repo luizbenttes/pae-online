@@ -26,13 +26,13 @@ constructor(
     private userProvider: UserProvider)
     {
     this.request = {};
-    this.email = this.userProvider.getUserEmail();
+    this.email = this.userProvider.email;
     this.createForm();
   }
 
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad NovaRequisicaoPage');
+    console.log('in NovaRequisicaoPage');
   }
 
 
@@ -43,6 +43,7 @@ constructor(
       emailCoor: [this.request.emailCoor],
       data: [this.request.data],
       requisicao : [this.request.requisicao],
+      id : [this.email + "Sem resposta"],
       resposta: ["Sem Resposta"]
     });
   }
@@ -52,7 +53,7 @@ constructor(
       this.provider.save(this.form.value)
         .then(() => {
           this.toast.create({ message: 'Requisição Enviada.', duration: 3000 }).present();
-          this.navCtrl.push("HomePage");
+          this.navCtrl.setRoot("HomePage");
         })
         .catch((e) => {
           this.toast.create({ message: 'Erro ao enviar requisição.', duration: 3000 }).present();

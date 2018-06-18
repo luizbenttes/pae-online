@@ -1,0 +1,33 @@
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>Requisições Respondidas</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content padding>
+
+      <ion-list>
+        <ion-card *ngFor="let request of requests | async">
+          <div class="para">
+            <ion-card-header align="center">
+            Coordenação: <span style="color:rgb(13, 100, 25)"> {{request.emailCoor}}</span>
+            </ion-card-header>
+          </div>
+    
+          <ion-card-content>
+            <div class="requisicao">
+              <h5>Requisição:
+                <b>{{ request.requisicao }}</b>
+              </h5>
+            </div>
+            <div class="resposta">
+              <h5>Resposta:
+                <b>{{ request.resposta }}</b>
+              </h5>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-list>
+    

@@ -14,6 +14,9 @@ import { UserProvider } from '../../providers/user/user';
 export class LoginPage {
 
   user = {} as User;
+  passwordType: string = 'password';
+  passwordIcon: string = 'eye-off';
+
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -22,17 +25,24 @@ export class LoginPage {
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
     private userProvider: UserProvider) {
+
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    console.log('in LoginPage');
   }
 
   async login(user: User) {
-    this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password)
+    user.email = user.email.toLowerCase()
+    this.afAuth.auth.signInWithEmailAndPassword(user.email.toLowerCase(), user.password)
       .then(() => {
+        // console.log("LOGIN FOI FEITO");
         this.userProvider.setUserEmail(user.email);
-        this.navCtrl.setRoot('HomePage');
+        this.userProvider.email = user.email;
+        //user.email = this.userProvider.getUserEmail();
+        if (user.email == this.userProvider.email){
+          this.navCtrl.setRoot('HomePage');
+        }
       })
       .catch((error) => {
         this.toastCtrl.create({ duration: 3000, position: 'bottom', message: 'Erro ao efetuar o login' })
@@ -45,4 +55,8 @@ export class LoginPage {
     this.navCtrl.push('RegisterPage');
   }
 
+  hideShowPassword() {
+    this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+    this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+  }
 }

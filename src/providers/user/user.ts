@@ -11,14 +11,13 @@ import { Storage } from '@ionic/storage';
 export class UserProvider {
   email: string;
   constructor(private storage: Storage) {
-    console.log('Hello UserProvider Provider');
-    this.returnUserEmail();
+    console.log('in UserProvider');
   }
 
   public returnUserEmail(){
     this.storage.get('email').then((val) => {
       this.email = val;
-      console.log(this.email);
+      console.log("email no storage:",this.email);
     })
     .catch((error) => {
       return Promise.reject(error);
@@ -31,7 +30,14 @@ export class UserProvider {
   }
   
   public setUserEmail(email: string){
+    console.log("Foi setado novo email", email);
     this.storage.set('email', email);
+    this.email = email;
+    //this.returnUserEmail();
+  }
+
+  public clean(){
+    this.storage.clear();
   }
 }
 
